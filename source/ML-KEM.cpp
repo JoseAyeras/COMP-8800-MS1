@@ -1,16 +1,14 @@
-#pragma once
+#include "ML-KEM.hpp"
+#include "K-PKE.hpp"
 
-#include <cstdint>
-#include <array>
+using namespace ML_KEM;
 
-namespace ML_KEM
-{
-    //this namespace holds the functions for ML-KEM as shown in the NIST standard
-    //https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.203.pdf
-    void KeyGen_internal(
+void KeyGen_internal(
         std::array<uint8_t, 32> d, //input: random number d
         std::array<uint8_t, 32> z, //input: random number z
         std::array<uint8_t, 800> & ek, //output: encapsulation key ek
         std::array<uint8_t, 1632> & dk  //output: decapsulation key dk
-    );
+){
+    std::array<uint8_t, 800> ekpke, dkpke;
+    K_PKE::KeyGen(d, ekpke, dkpke);
 }
